@@ -1,0 +1,20 @@
+{
+  "name": "kittyKiss",
+  "version": "0.0.1",
+  "authors": [
+    "sasZilla <sas.smail.sas@gmail.com>"
+  ],
+  "description": "kitty kisses",
+  "main": "app.js",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
