@@ -7,26 +7,15 @@
 
 module.exports = {
   restricted:function(req,res){
-    return res.ok("If You can see this you are authenticated");
+    return res.json(req.session);
   },
   open:function(req,res){
     return res.ok("This is open to all!!!");
   },
 
-	findRoom: function(req, res) {
-    RoomServise.findRoom(function(room) {
+	joinRoom: function(req, res) {
+    RoomServise.joinRoom(req.session, function(room) {
       res.json(room);
     });
-  },
-
-  createRoom: function() {
-    var todoVal = (req.body.value) ? req.body.value : undefined
-    TodoService.addTodo(todoVal, function(success) {
-        res.json(success);
-    });
-  },
-
-  deleteRoom: function(req, res) {
-
   }
 };

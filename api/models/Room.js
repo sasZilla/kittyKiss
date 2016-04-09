@@ -11,18 +11,19 @@ module.exports = {
     name: {
       type: "string"
     },
-
     background: {
       type: "string"
     },
     music: {
       type: "string"
     },
-    userCountInRoom: {
-      type: "integer"
+    isFull: {
+      type: "boolean"
     },
-    usersInRoom: {
-      type: "array"
+
+    members: {
+      collection: 'user',
+      via: 'room'
     }
   }
 };

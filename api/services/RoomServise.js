@@ -1,20 +1,35 @@
 module.exports = {
-  findRoom: function(next) {
-    Room.find().exec(function(err, todos) {
+  joinRoom: function(session, next) {
+    var maxUsersInRoom = 10;
+
+    Room.findOrCreate({isFull: false}).populate('members').exec(function(err, room) {
       if(err) throw err;
-      next(todos);
+
+      if (session && session.user && session.user.auth && session.user.auth.id) {
+        room.members.add(session.user.auth.id)
+      }
+
+      if (room.members.length >= maxUsersInRoom) {
+        room.isFull = true;
+      }
+
+      room.save(function(err,res){
+        Room.findOne(room.id).populate('members').exec(function(err, room) {
+          next(room);
+        });
+      });
     });
   },
   createRoom: function(val, next) {
-    Todo.create({name: val}).exec(function(err, todo) {
+    Room.create({name: val}).exec(function(err, room) {
       if(err) throw err;
-      next(todo);
+      next(room);
     });
   },
   removeRoom: function(val, next) {
-    Todo.destroy({name: val}).exec(function(err, todo) {
+    Room.destroy({name: val}).exec(function(err, room) {
       if(err) throw err;
-      next(todo);
+      next(room);
     });
   }
 };

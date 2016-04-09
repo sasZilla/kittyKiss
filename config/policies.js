@@ -28,7 +28,7 @@ module.exports.policies = {
 
   '*': true,
   RoomController:{
-    restricted:['sessionAuth'],
+    // restricted:['sessionAuth'],
     open:true
   }
 
